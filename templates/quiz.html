@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home Page</a></li>
+            {% if 'user_id' not in session %}
+                <li><a href="{{ url_for('register') }}">Registrazione</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% else %}
+                <li><a href="{{ url_for('quiz') }}">Quiz</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Domanda {{ index }} di {{ total }}</h1>
+        <form method="POST">
+            <div class="question-box">
+                <p><strong>{{ question.question }}</strong></p>
+                <label><input type="radio" name="answer" value="a" required> {{ question.option_a }}</label><br>
+                <label><input type="radio" name="answer" value="b"> {{ question.option_b }}</label><br>
+                <label><input type="radio" name="answer" value="c"> {{ question.option_c }}</label><br>
+                <label><input type="radio" name="answer" value="d"> {{ question.option_d }}</label><br>
+            </div>
+            <button type="submit">Prossima domanda</button>
+        </form>
+    </div>
+
+    <footer>
+        <div class="footer-left"></div>
+        <div class="footer-right">
+            <p>Sviluppato da Valeria Milani</p>
+        </div>
+    </footer>
+</body>
+</html>

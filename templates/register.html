@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrazione</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+            <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home Page</a></li>
+            {% if 'user_id' not in session %}
+                <li><a href="{{ url_for('register') }}">Registrazione</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% else %}
+                <li><a href="{{ url_for('quiz') }}">Quiz</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Registrazione</h1>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Conferma Password" required>
+            <input type="text" name="nickname" placeholder="Nickname" required>
+            <button type="submit">Registrati</button>
+        </form>
+        <p>Hai già un account? <a href="{{ url_for('login') }}">Accedi</a></p>
+        <a href="{{ url_for('index') }}">← Torna alla Home</a>
+    </div>
+
+    <footer>
+    <div class="footer-left">
+
+    </div>
+    <div class="footer-right">
+        <p>Sviluppato da Valeria Milani</p>
+    </div>
+</footer>
+</body>
+</html>

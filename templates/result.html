@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risultato Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+            <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home Page</a></li>
+            {% if 'user_id' not in session %}
+                <li><a href="{{ url_for('register') }}">Registrazione</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% else %}
+                <li><a href="{{ url_for('quiz') }}">Quiz</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Risultato del Quiz</h1>
+        <p>Ciao <strong>{{ user.nickname }}</strong>!</p>
+        <p>Il tuo punteggio attuale è: <strong>{{ user.score }}</strong> punti</p>
+
+        <h2>🏆 Classifica</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Posizione</th>
+                    <th>Nickname</th>
+                    <th>Punteggio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for index, player in enumerate(leaderboard) %}
+                <tr>
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ player.nickname }}</td>
+                    <td>{{ player.score }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ url_for('quiz') }}">↻ Riprova il quiz</a> |
+        <a href="{{ url_for('index') }}">🏠 Torna alla Home</a>
+    </div>
+
+
+    <footer>
+    <div class="footer-left">
+
+    </div>
+    <div class="footer-right">
+        <p>Sviluppato da Valeria Milani</p>
+    </div>
+</footer>
+</body>
+</html>
